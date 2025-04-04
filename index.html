@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Shooter - RepoGameplay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Apple-inspired color palette
+                        primary: '#007AFF', // iOS blue
+                        secondary: '#34C759', // iOS green
+                        dark: '#1C1C1E', // iOS dark gray
+                        light: '#F5F5F7', // Apple light gray
+                        accent: '#FF2D55' // iOS pink
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light min-h-screen">
+    <!-- Simple Navigation -->
+    <header class="bg-white shadow-sm">
+        <nav class="container mx-auto px-4 py-3">
+            <!-- Navigation Links -->
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-xl font-semibold text-primary">RepoGameplay</a>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-primary">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="/games/action" class="text-dark hover:text-primary">Action</a>
+                    <a href="/games/puzzle" class="text-dark hover:text-primary">Puzzle</a>
+                    <a href="/games/strategy" class="text-dark hover:text-primary">Strategy</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu (hidden by default) -->
+            <div id="mobile-menu" class="hidden mt-3 pb-2 md:hidden">
+                <div class="flex flex-col space-y-2">
+                    <a href="/games/action" class="text-dark hover:text-primary">Action</a>
+                    <a href="/games/puzzle" class="text-dark hover:text-primary">Puzzle</a>
+                    <a href="/games/strategy" class="text-dark hover:text-primary">Strategy</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Game Title and Category -->
+        <div class="mb-4">
+            <div class="flex flex-wrap items-center mb-2">
+                <h1 class="text-2xl font-bold text-dark mr-3">Space Shooter</h1>
+                <span class="inline-block bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full">Action</span>
+            </div>
+            
+            <!-- Simple Breadcrumb -->
+            <div class="text-sm text-gray-500 mb-4">
+                <a href="/" class="hover:text-primary">Home</a>
+                <span class="mx-1">/</span>
+                <a href="/games/action" class="hover:text-primary">Action</a>
+                <span class="mx-1">/</span>
+                <span>Space Shooter</span>
+            </div>
+        </div>
+        
+        <!-- Game Container with iframe -->
+        <div class="bg-white rounded-lg shadow-md mb-6">
+            <!-- Game iframe container with 16:9 aspect ratio -->
+            <div class="relative w-full" style="padding-top: 56.25%;">
+                <!-- Loading Indicator (shown while game loads) -->
+                <div id="game-loader" class="absolute inset-0 flex items-center justify-center bg-dark bg-opacity-10 z-10">
+                    <div class="flex flex-col items-center">
+                        <svg class="animate-spin h-10 w-10 text-primary mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <p class="font-medium text-dark">Loading Game...</p>
+                    </div>
+                </div>
+                
+                <!-- Iframe Container (absolute positioned to fill container) -->
+                <div id="game-container" class="absolute inset-0 bg-dark">
+                    <!-- Game iframe will be inserted here -->
+                    <!-- 
+                    <iframe 
+                        id="game-frame" 
+                        src="GAME_URL_HERE" 
+                        class="w-full h-full border-0" 
+                        allowfullscreen
+                        onload="document.getElementById('game-loader').style.display='none';"
+                    ></iframe>
+                    -->
+                    
+                    <!-- Placeholder image (remove in production) -->
+                    <img src="/api/placeholder/800/450" alt="Space Shooter Game" class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <!-- Game Controls -->
+            <div class="p-3 border-t border-gray-100 flex justify-between items-center">
+                <button id="start-game" class="bg-primary text-white px-4 py-1.5 rounded hover:bg-opacity-90 transition-colors">
+                    Start Game
+                </button>
+                <button id="fullscreen-btn" class="text-dark hover:text-primary" title="Fullscreen">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Game Description -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+            <h2 class="text-lg font-bold text-dark mb-2">About This Game</h2>
+            <p class="text-gray-700">
+                Space Shooter is an action-packed arcade game where you control a spaceship and battle against waves of alien invaders. Dodge enemy fire, collect power-ups, and save the galaxy from destruction. Test your reflexes and shooting skills in this fast-paced space adventure!
+            </p>
+        </div>
+        
+        <!-- Related Games -->
+        <div class="mb-6">
+            <h2 class="text-lg font-bold text-dark mb-3">You Might Also Like</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Related Game 1 -->
+                <a href="/games/alien-attack" class="bg-white rounded-lg shadow overflow-hidden transition-transform hover:-translate-y-1">
+                    <img src="/api/placeholder/400/225" alt="Alien Attack" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <span class="inline-block bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full">Action</span>
+                        <h3 class="mt-2 font-medium text-dark">Alien Attack</h3>
+                    </div>
+                </a>
+                
+                <!-- Related Game 2 -->
+                <a href="/games/space-runner" class="bg-white rounded-lg shadow overflow-hidden transition-transform hover:-translate-y-1">
+                    <img src="/api/placeholder/400/225" alt="Space Runner" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <span class="inline-block bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full">Action</span>
+                        <h3 class="mt-2 font-medium text-dark">Space Runner</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Simple JS for functionality -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Start game button (for demonstration)
+        document.getElementById('start-game').addEventListener('click', function() {
+            // In a real implementation, this could load the iframe or start the game
+            const gameLoader = document.getElementById('game-loader');
+            gameLoader.style.display = 'none';
+            
+            // Create and append iframe (this is a placeholder - in production you'd add your game URL)
+            const gameContainer = document.getElementById('game-container');
+            
+            // Uncomment and modify this code to actually load a game:
+            /*
+            gameContainer.innerHTML = '';
+            const iframe = document.createElement('iframe');
+            iframe.src = 'YOUR_GAME_URL_HERE';
+            iframe.className = 'w-full h-full border-0';
+            iframe.allowFullscreen = true;
+            gameContainer.appendChild(iframe);
+            */
+            
+            // For demo, just remove the placeholder image and show a message
+            gameContainer.innerHTML = '<div class="w-full h-full flex items-center justify-center text-white">Game Started!</div>';
+        });
+        
+        // Fullscreen button (basic implementation)
+        document.getElementById('fullscreen-btn').addEventListener('click', function() {
+            const gameContainer = document.getElementById('game-container');
+            
+            if (gameContainer.requestFullscreen) {
+                gameContainer.requestFullscreen();
+            } else if (gameContainer.webkitRequestFullscreen) {
+                gameContainer.webkitRequestFullscreen();
+            } else if (gameContainer.msRequestFullscreen) {
+                gameContainer.msRequestFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
